@@ -43,24 +43,31 @@ def register(request):
 
 def create_video(request):
     search_query = request.GET.get('search')
+    print("s",search_query)
     datas = Video.objects.all()
-    print("datas",datas)
+    print("data1",datas)
+    
     if search_query:
         datas = datas.filter(
             Q(name__icontains=search_query) |
             Q(video_url__icontains=search_query) 
             
         )
-        
-        video_data = []
-        for video in datas:
-            video_info = {
-                'video': video,
+        return render(request, 'main/create_video.html', {'datas': datas})
+        # print("filter",datas)
+        # video_data = list(datas)
+        # #video_data = []
+        # for video in datas:
+        #     video_info = {
+        #         'video': video,
                 
-            }
-            video_data.append(video_info)
+        #     }
+        #     video_data.append(video_info)
+        #     print("video",video)
+        #     print("video_data",video_data)
 
-        return render(request, "main/create_video.html", {"datas": video_data})
+        # return render(request, "main/create_video.html", {"datas": video_data})
+         
     
     if request.method == 'POST':
         obj = Video()
@@ -71,6 +78,7 @@ def create_video(request):
         obj.save()
         return redirect('/create_video')
     datas = Video.objects.all()
+    print(datas)
     return render(request,"main/create_video.html",{"datas":datas})
 
 # def update_video(request, video_id):
