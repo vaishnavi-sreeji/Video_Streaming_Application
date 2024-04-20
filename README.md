@@ -26,3 +26,5 @@ http://127.0.0.1:8000/videos/<id>
 To run the appplication
 
 python manage.py runserver
+
+ when providing the http://127.0.0.1:8000/home it will be redirecting to the home page.At the top right it contains the videos link where by clicking it navigate to the video list page
